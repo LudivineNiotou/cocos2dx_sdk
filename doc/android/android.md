@@ -1013,8 +1013,6 @@ You can verify if the Adjust SDK is currently active by using the `Adjust2dx::is
 
 ## <a id="license"></a>License
 
-### <a id="license"></a>License
-
 The Adjust SDK is licensed under the MIT License.
 
 Copyright (c) 2012-2018 Adjust GmbH, http://www.adjust.com
