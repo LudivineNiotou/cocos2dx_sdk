@@ -58,7 +58,9 @@ This is the Cocos2d-x SDK of Adjust™. You can read more about Adjust™ at [Ad
 
 * [License](#license)
 
-## <a id="basic-integration"></a>Basic integration
+---
+
+## <a id="basic-integration"></a>Quick Start
 
 How to integrate the Adjust SDK into your Cocos2d-x iOS project.
 
