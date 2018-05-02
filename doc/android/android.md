@@ -63,7 +63,11 @@ This is the Cocos2d-x SDK of Adjust™. You can read more about Adjust™ at [ad
 * [Offline mode](#offline-mode)
 * [Disable tracking](#disable-tracking)
 
-### [License](#license)
+
+
+## License
+
+* [License](#license)
 
 
 ---
