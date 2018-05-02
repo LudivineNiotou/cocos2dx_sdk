@@ -32,7 +32,7 @@ This is the Cocos2d-x SDK of Adjust™. You can read more about Adjust™ at [ad
     
 ### License 
 
-* [License](#license)
+   * [License](#license)
 
 ---
 
