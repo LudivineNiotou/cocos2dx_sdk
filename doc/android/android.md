@@ -1012,7 +1012,10 @@ Adjust2dx::setEnabled(false);
 You can verify if the Adjust SDK is currently active by using the `Adjust2dx::isEnabled()` method. It is always possible to activate the Adjust SDK by invoking `Adjust2dx::setEnabled` with the parameter set to `true`.
 
 
-## <a id="license"></a>License
+
+## License
+
+### <a id="license"></a>License
 
 The Adjust SDK is licensed under the MIT License.
 
