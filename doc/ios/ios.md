@@ -2,44 +2,52 @@
 
 This is the Cocos2d-x SDK of Adjust™. You can read more about Adjust™ at [Adjust.com].
 
+---
+
 ## Table of contents
 
-* [Basic integration](#basic-integration)
-   * [Get the SDK](#sdk-get)
-   * [Add the SDK to your project](#sdk-add)
-   * [Add the frameworks to your project](#sdk-frameworks)
-   * [Add additional linker flags](#sdk-linker-flags)
-   * [Integrate the SDK into your app](#sdk-integrate)
-   * [Adjust logging](#sdk-logging)
-   * [Build your app](#sdk-build)
-* [Additional features](#additional-features)
-   * [Event tracking](#event-tracking)
-      * [Revenue tracking](#revenue-tracking)
-      * [Revenue deduplication](#revenue-deduplication)
-      * [In-app purchase verification](#iap-verification)
-      * [Callback parameters](#callback-parameters)
-      * [Partner parameters](#partner-parameters)
-    * [Session parameters](#session-parameters)
+### Basic integration
+
+* [Get the SDK](#sdk-get)
+* [Add the SDK to your project](#sdk-add)
+* [Add the frameworks to your project](#sdk-frameworks)
+* [Add additional linker flags](#sdk-linker-flags)
+* [Integrate the SDK into your app](#sdk-integrate)
+* [Adjust logging](#sdk-logging)
+* [Build your app](#sdk-build)
+
+### Additional Features
+
+* [Event tracking](#event-tracking)
+    * [Revenue tracking](#revenue-tracking)
+    * [Revenue deduplication](#revenue-deduplication)
+    * [In-app purchase verification](#iap-verification)
+    * [Callback parameters](#callback-parameters)
+    * [Partner parameters](#partner-parameters)
+* [Session parameters](#session-parameters)
       * [Session callback parameters](#session-callback-parameters)
       * [Session partner parameters](#session-partner-parameters)
       * [Delay start](#delay-start)
-    * [Attribution callback](#attribution-callback)
-    * [Session and event callbacks](#session-event-callbacks)
-    * [Disable tracking](#disable-tracking)
-    * [Offline mode](#offline-mode)
-    * [Event buffering](#event-buffering)
-    * [SDK signature](#sdk-signature)
-    * [Background tracking](#background-tracking)
-    * [Device IDs](#device-ids)
-        * [iOS advertising identifier](#di-idfa)
-        * [Adjust device identifier](#di-adid)
-        * [User attribution](#user-attribution)
-    * [Push token](#push-token)
-    * [Pre-installed trackers](#pre-installed-trackers)
-    * [Deep linking](#deeplinking)
+* [Attribution callback](#attribution-callback)
+* [Session and event callbacks](#session-event-callbacks)
+* [Disable tracking](#disable-tracking)
+* [Offline mode](#offline-mode)
+* [Event buffering](#event-buffering)
+* [SDK signature](#sdk-signature)
+* [Background tracking](#background-tracking)
+* [Device IDs](#device-ids)
+      * [iOS advertising identifier](#di-idfa)
+      * [Adjust device identifier](#di-adid)
+      * [User attribution](#user-attribution)
+* [Push token](#push-token)
+* [Pre-installed trackers](#pre-installed-trackers)
+* [Deep linking](#deeplinking)
         * [Standard deep linking](#deeplinking-standard)
         * [Deferred deep linking](#deeplinking-deferred)
         * [Deep link handling for iOS apps](#deeplinking-ios)
+        
+### License
+
 * [License](#license)
 
 ## <a id="basic-integration"></a>Basic integration
