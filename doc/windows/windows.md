@@ -36,7 +36,7 @@ This is the Cocos2d-x SDK of Adjust™. You can read more about Adjust™ at [ad
 
 ---
 
-## <a id="basic-integration">Basic integration
+## <a id="basic-integration">Quick Start
 
 How to integrate the Adjust SDK into your Cocos2d-x Windows or Windows Phone project.
 
@@ -145,9 +145,9 @@ Build and run your app. If the build succeeds, you should carefully read the SDK
 
 ![][run]
 
-## <a id="additional-features">Additional features
 
-Once you have integrated the Adjust SDK into your project, you can take advantage of the following features.
+
+## Event Tracking
 
 ### <a id="event-tracking">Event tracking
 
@@ -177,6 +177,10 @@ Adjust2dx::trackEvent(adjustEvent);
 When you set a currency token, Adjust will automatically convert the incoming revenues into a reporting revenue of your choice. Read more about [currency conversion here][currency-conversion].
 
 You can read more about revenue and event tracking in the [event tracking guide][event-tracking].
+
+
+
+## Custom Parameters
 
 ### <a id="callback-parameters">Callback parameters
 
@@ -219,6 +223,12 @@ Adjust2dx::trackEvent(adjustEvent);
 ```
 
 You can read more about special partners and how to integrate them in our [guide to special partners][special-partners].
+
+
+
+## <a id="additional-features">Additional features
+
+Once you have integrated the Adjust SDK into your project, you can take advantage of the following features.
 
 ### <a id="attribution-callback">Attribution callback
 
@@ -274,29 +284,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 Please make sure to consider the [applicable attribution data policies][attribution-data].
 
-### <a id="disable-tracking">Disable tracking
 
-You can disable the Adjust SDK from tracking by invoking the `Adjust2dx::setEnabled` method with the enabled parameter set to `false`. This setting is **remembered between sessions**, but it can only be activated after the first session.
-
-```cpp
-Adjust2dx::setEnabled(false);
-```
-
-You can verify if the Adjust SDK is currently active by using the `Adjust2dx::isEnabled()` method. It is always possible to activate the Adjust SDK by invoking `Adjust2dx::setEnabled` with the parameter set to `true`.
-
-### <a id="offline-mode">Offline mode
-
-You can put the Adjust SDK in offline mode, suspending transmission to our servers while retaining tracked data to be sent later. When in offline mode, all information is saved in a file, so it is best not to trigger too many events while in offline mode.
-
-You can activate offline mode by calling `Adjust2dx::setOfflineMode` with the parameter set to `true`.
-
-```cpp
-Adjust2dx::setOfflineMode(true);
-```
-
-Conversely, you can deactivate offline mode by calling `Adjust2dx::setOfflineMode` with the parameter set to `false`. When the Adjust SDK is put back in online mode, all saved information is send to our servers with the correct time information.
-
-Unlike when disabling tracking, **this setting is not remembered** between sessions. This means that the SDK always starts in online mode, even if the app was terminated in offline mode.
 
 ### <a id="event-buffering">Event buffering
 
@@ -338,6 +326,32 @@ If nothing set here, event buffering is **disabled by default**.
 [add-winrt-project]:    https://raw.github.com/adjust/sdks/master/Resources/cocos2dx/windows/add_winrt_project.png
 
 [add-winrt-project-reference]: https://raw.github.com/adjust/sdks/master/Resources/cocos2dx/windows/add_winrt_project_reference.png
+
+### <a id="offline-mode">Offline mode
+
+You can put the Adjust SDK in offline mode, suspending transmission to our servers while retaining tracked data to be sent later. When in offline mode, all information is saved in a file, so it is best not to trigger too many events while in offline mode.
+
+You can activate offline mode by calling `Adjust2dx::setOfflineMode` with the parameter set to `true`.
+
+```cpp
+Adjust2dx::setOfflineMode(true);
+```
+
+Conversely, you can deactivate offline mode by calling `Adjust2dx::setOfflineMode` with the parameter set to `false`. When the Adjust SDK is put back in online mode, all saved information is send to our servers with the correct time information.
+
+Unlike when disabling tracking, **this setting is not remembered** between sessions. This means that the SDK always starts in online mode, even if the app was terminated in offline mode.
+
+### <a id="disable-tracking">Disable tracking
+
+You can disable the Adjust SDK from tracking by invoking the `Adjust2dx::setEnabled` method with the enabled parameter set to `false`. This setting is **remembered between sessions**, but it can only be activated after the first session.
+
+```cpp
+Adjust2dx::setEnabled(false);
+```
+
+You can verify if the Adjust SDK is currently active by using the `Adjust2dx::isEnabled()` method. It is always possible to activate the Adjust SDK by invoking `Adjust2dx::setEnabled` with the parameter set to `true`.
+
+
 
 ## <a id="license">License
 
