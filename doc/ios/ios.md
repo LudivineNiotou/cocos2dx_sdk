@@ -144,15 +144,111 @@ AdjustConfig2dx adjustConfig = AdjustConfig2dx(appToken, environment, true);
 adjustConfig.setLogLevel(AdjustLogLevel2dxSuppress);
 ```
 
-## <a id="sdk-build"></a>Build your app
+### <a id="sdk-signature"></a>SDK signature
+
+An account manager must activate the Adjust SDK signature. Contact Adjust support (support@adjust.com) if you are interested in using this feature.
+
+If the SDK signature has already been enabled on your account and you have access to App Secrets in your Adjust Dashboard, please use the method below to integrate the SDK signature into your app.
+
+An App Secret is set by passing all secret parameters (`secretId`, `info1`, `info2`, `info3`, `info4`) to `setAppSecret` method of `AdjustConfig` instance:
+
+```cpp
+auto adjustConfig = AdjustConfig2dx(appToken, environment);
+
+adjustConfig.setAppSecret(secretId, info1, info2, info3, info4);
+
+Adjust2dx::start(adjustConfig);
+```
+
+### <a id="sdk-build"></a>Build your app
 
 Build and run your app. If the build is successful, carefully read through the SDK logs in the console. After the initial app launch, you should see an info log entry saying `Install tracked`.
 
 ![][run]
 
-## <a id="additional-features"></a>Additional features
 
-Once you integrate the Adjust SDK into your project, you can take advantage of the following features.
+## Deep Linking
+
+### <a id="deeplinking"></a>Deep linking
+
+If you are using the Adjust tracker URL with an option to deep link into your app from the URL, there is the possibility to get information about the deep link URL and its content. There are two scenarios when it comes to deep linking: standard and deferred. 
+
+Standard deep linking is when a user already has your app installed. iOS offers native support for retrieving information about the deep link content in this scenario.
+
+Deferred deep linking is when a user does not have your app installed. iOS does not offer native support for deferred deep linking. Instead, the Adjust SDK offers a way to retrieve information about the deep link content.
+
+You need to set up deep link handling in your app **at a native level** - in your generated Xcode project.
+
+### <a id="deeplinking-standard"></a>Standard deep linking
+
+Unfortunately, in this scenario the information about the deep link can not be delivered to you in your Cocos2d-x C++ code. Once you have set up your app to handle deep linking, you will get information about the deep link at a native level. For more information, refer to our chapters below on how to enable deep linking for iOS apps.
+
+### <a id="deeplinking-deferred"></a>Deferred deep linking
+
+In order to get information about the URL content in a deferred deep-linking scenario, you will need to set a callback method on the `AdjustConfig2dx` object which will receive a `std::string` parameter, where the content of the URL will be delivered. You should set this method on the `AdjustConfig2dx` object instance by calling the `setDeferredDeeplinkCallback` method:
+
+```cpp
+#include "Adjust/Adjust2dx.h"
+
+//...
+
+static bool deferredDeeplinkCallbackMethod(std::string deeplink) {
+    CCLOG("\nDeferred deep link received!");
+    CCLOG("\nURL: %s", deeplink.c_str());
+    CCLOG("\n");
+
+    Adjust2dx::appWillOpenUrl(deeplink);
+
+    return true;
+}
+
+// ...
+
+bool AppDelegate::applicationDidFinishLaunching() {
+    std::string appToken = "{YourAppToken}";
+    std::string environment = AdjustEnvironmentSandbox2dx;
+
+    AdjustConfig2dx adjustConfig = AdjustConfig2dx(appToken, environment);
+    adjustConfig.setLogLevel(AdjustLogLevel2dxVerbose);
+    adjustConfig.setDeferredDeeplinkCallback(deferredDeeplinkCallbackMethod);
+
+    Adjust2dx::start(adjustConfig);
+
+    // ...
+}
+```
+
+<a id="deeplinking-deferred-open">In the deferred deep-linking scenario, there is one additional setting which can be set on the deferred deep link callback method. Once the Adjust SDK gets the deferred deep link information, you can choose whether our SDK opens this URL or not. To do this, set the return value of your deferred deep link callback method.
+
+If nothing is set, **the Adjust SDK will always try to launch the URL by default**.
+
+### <a id="deeplinking-ios"></a>Deep link handling for iOS apps
+
+**This should be done in a native Xcode project.**
+
+To set up your iOS app to handle deep linking at a native level, please follow our [guide][ios-deeplinking] in the official iOS SDK README.
+
+
+[adjust]:       http://adjust.com
+[dashboard]:    http://adjust.com
+[adjust.com]:   http://adjust.com
+
+[releases]:             https://github.com/adjust/cocos2dx_sdk/releases
+[deeplinking]:          https://docs.adjust.com/en/tracker-generation/#deeplinking
+[event-tracking]:       https://docs.adjust.com/en/event-tracking
+[callbacks-guide]:      https://docs.adjust.com/en/callbacks
+[ios-deeplinking]:      https://github.com/adjust/ios_sdk/#deeplinking
+[special-partners]:     https://docs.adjust.com/en/special-partners
+[attribution-data]:     https://github.com/adjust/sdks/blob/master/doc/attribution-data.md
+[currency-conversion]:  https://docs.adjust.com/en/event-tracking/#tracking-purchases-in-different-currencies
+
+[run]:                    https://raw.github.com/adjust/sdks/master/Resources/cocos2dx/ios/run.png
+[add-ios-files]:          https://raw.github.com/adjust/sdks/master/Resources/cocos2dx/ios/add_ios_files.png
+[add-adjust2dx]:          https://raw.github.com/adjust/sdks/master/Resources/cocos2dx/ios/add_adjust2dx.png
+[add-the-frameworks]:     https://raw.github.com/adjust/sdks/master/Resources/cocos2dx/ios/add_the_frameworks.png
+[add-other-linker-flags]: https://raw.github.com/adjust/sdks/master/Resources/cocos2dx/ios/add_other_linker_flags.png
+
+## Event Tracking
 
 ### <a id="event-tracking"></a>Event tracking
 
@@ -202,7 +298,16 @@ Adjust2dx::trackEvent(adjustEvent);
 
 In-app purchase verification can be done with the Cocos2d-x purchase SDK, which is currently in development and will soon be made publicly available. For more information, please contact support@adjust.com.
 
-### <a id="callback-parameters"></a>Callback parameters
+
+## Custom Parameters
+
+### <a id="event-parameters"></a>Event parameters
+
+In addition to the data points that Adjust collects [by default](https://partners.adjust.com/placeholders/), you can use the Adjust SDK to track and add to the events as many custom values as you need (user IDs, product IDs...). Custom parameters are only available as raw data (i.e., they won't appear in the Adjust dashboard).
+
+You should use Callback parameters for the values that you collect for your own internal use, and Partner parameters for those that you wish to share with external partners. If a value (e.g. product ID) is tracked both for internal use and to forward it to external partners, the best practice would be to track it both as callback and partner parameter.
+
+### <a id="callback-parameters"></a>Event callback parameters
 
 You can register a callback URL for an event in your [dashboard]. We will send a GET request to that URL whenever the event is tracked. You can add callback parameters to an event by calling the `addCallbackParameter` method of the event before tracking it. We will then append these parameters to your callback URL.
 
@@ -227,7 +332,7 @@ Adjust supports a variety of placeholders, like `{idfa}`, that can be used as pa
 
 You can read more about using URL callbacks, including a full list of available values, in our [callbacks guide][callbacks-guide].
 
-### <a id="partner-parameters"></a>Partner parameters
+### <a id="partner-parameters"></a>Event partner parameters
 
 For any integrations that you have activated in your Adjust dashboard, you can add parameters to send to these network partners.
 
@@ -312,6 +417,21 @@ In this case, the Adjust SDK will wait 5.5 seconds before sending the initial in
 
 **The maximum delay start time of the Adjust SDK is 10 seconds**.
 
+
+## <a id="additional-features"></a>Additional features
+
+Once you integrate the Adjust SDK into your project, you can take advantage of the following features.
+
+### <a id="push-token"></a>Push token
+
+To send us a push notification token, add the following call to Adjust **whenever your app receives the token or it is updated**:
+
+```cpp
+Adjust2dx::setDeviceToken("YourPushNotificationToken");
+```
+
+Push tokens are used for the Adjust Audience Builder and client callbacks, and are required for the upcoming uninstall tracking feature.
+
 ### <a id="attribution-callback"></a>Attribution callback
 
 Adjust can also send you a callback upon any change in attribution. Due to the different sources considered for attribution, this information cannot be provided synchronously. Follow these steps if you wish to implement the callback in your application:
@@ -367,6 +487,16 @@ bool AppDelegate::applicationDidFinishLaunching() {
 ```
 
 Please make sure to consider the [applicable attribution data policies][attribution-data].
+
+### <a id="user-attribution"></a>User attribution
+
+Attribution callbacks are triggered via the method described in the [attribution callback section](#attribution-callback). They provide you with information about any changes to your users’ attribution values. If you wish to access information about a user's current attribution value at any other time, you can make a call to the following method of the `Adjust2dx` instance:
+
+```cpp
+AdjustAttribution2dx attribution = Adjust2dx::getAttribution();
+```
+
+**Note**: Information about a user’s current attribution value is only available after the Adjust backed has tracked your app's installation and an initial attribution callback has been triggered. From that moment on, the Adjust SDK has information about the user's attribution value and you can access it with this method. So, **it is not possible** to access a user's attribution value before the SDK has been initialized and an initial attribution callback has been triggered.
 
 ### <a id="session-event-callbacks"></a>Session and event callbacks
 
@@ -519,93 +649,6 @@ And both event- and session-failed objects also contain:
 
 - `std::string willRetry` indicates there will be an attempt to resend the package at a later time.
 
-### <a id="disable-tracking"></a>Disable tracking
-
-You can disable the Adjust SDK from tracking by invoking the `Adjust2dx::setEnabled` method with the enabled parameter set to `false`. This setting is **remembered between sessions**, but it can only be activated after the first session.
-
-```cpp
-Adjust2dx::setEnabled(false);
-```
-
-You can verify if the Adjust SDK is currently active by using the `Adjust2dx::isEnabled()` method. It is always possible to activate the Adjust SDK by invoking `Adjust2dx::setEnabled` with the parameter set to `true`.
-
-### <a id="offline-mode"></a>Offline mode
-
-You can put the Adjust SDK into offline mode, suspending transmissions to our servers while retaining tracked data to be sent later. When in offline mode, all information is saved in a file, so it is best not to trigger too many events while in offline mode.
-
-You can activate offline mode by calling `Adjust2dx::setOfflineMode` with the parameter set to `true`.
-
-```cpp
-Adjust2dx::setOfflineMode(true);
-```
-
-Conversely, you can deactivate offline mode by calling `Adjust2dx::setOfflineMode` with the parameter set to `false`. When the Adjust SDK is put back in online mode, all saved information is sent to our servers with the correct time information.
-
-Unlike when disabling tracking, **this setting is not remembered** between sessions. This means that the Adjust SDK always starts in online mode, even if the app was terminated in offline mode.
-
-### <a id="event-buffering"></a>Event buffering
-
-If your app makes heavy use of event tracking, you might want to delay some HTTP requests in order to send them in one batch every minute. You can enable event buffering through your `AdjustConfig2dx` instance by calling the `setEventBufferingEnabled` method:
-
-```cpp
-// ...
-
-bool AppDelegate::applicationDidFinishLaunching() {
-    std::string appToken = "{YourAppToken}";
-    std::string environment = AdjustEnvironmentSandbox2dx;
-
-    AdjustConfig2dx adjustConfig = AdjustConfig2dx(appToken, environment);
-    adjustConfig.setLogLevel(AdjustLogLevel2dxVerbose);
-    adjustConfig.setEventBufferingEnabled(true);
-
-    Adjust2dx::start(adjustConfig);
-
-    // ...
-}
-```
-
-If nothing is set here, event buffering is **disabled by default**.
-
-
-### <a id="sdk-signature"></a>SDK signature
-
-An account manager must activate the Adjust SDK signature. Contact Adjust support (support@adjust.com) if you are interested in using this feature.
-
-If the SDK signature has already been enabled on your account and you have access to App Secrets in your Adjust Dashboard, please use the method below to integrate the SDK signature into your app.
-
-An App Secret is set by passing all secret parameters (`secretId`, `info1`, `info2`, `info3`, `info4`) to `setAppSecret` method of `AdjustConfig` instance:
-
-```cpp
-auto adjustConfig = AdjustConfig2dx(appToken, environment);
-
-adjustConfig.setAppSecret(secretId, info1, info2, info3, info4);
-
-Adjust2dx::start(adjustConfig);
-```
-
-### <a id="background-tracking"></a>Background tracking
-
-The default behavior of the Adjust SDK is to **pause sending HTTP requests while the app is in the background**. You can change this in your `AdjustConfig2dx` instance by calling the `setSendInBackground` method:
-
-```cpp
-// ...
-
-bool AppDelegate::applicationDidFinishLaunching() {
-    std::string appToken = "{YourAppToken}";
-    std::string environment = AdjustEnvironmentSandbox2dx;
-
-    AdjustConfig2dx adjustConfig = AdjustConfig2dx(appToken, environment);
-    adjustConfig.setLogLevel(AdjustLogLevel2dxVerbose);
-    adjustConfig.setSendInBackground(true);
-
-    Adjust2dx::start(adjustConfig);
-
-    // ...
-}
-```
-
-If nothing is set here, sending in the background is **disabled by default**.
-
 ### <a id="device-ids"></a>Device IDs
 
 Certain services (such as Google Analytics) require you to coordinate device and client IDs in order to prevent duplicate reporting.
@@ -627,26 +670,6 @@ std::string adid = Adjust2dx::getAdid();
 ```
 
 **Note**: Information about the **adid** is only available after the Adjust backed has tracked your app's installation. From that moment on, the Adjust SDK has information about the device **adid** and you can access it with this method. So, **it is not possible** to access the **adid** before the SDK has been initialized and the installation of your app has been tracked successfully.
-
-### <a id="user-attribution"></a>User attribution
-
-Attribution callbacks are triggered via the method described in the [attribution callback section](#attribution-callback). They provide you with information about any changes to your users’ attribution values. If you wish to access information about a user's current attribution value at any other time, you can make a call to the following method of the `Adjust2dx` instance:
-
-```cpp
-AdjustAttribution2dx attribution = Adjust2dx::getAttribution();
-```
-
-**Note**: Information about a user’s current attribution value is only available after the Adjust backed has tracked your app's installation and an initial attribution callback has been triggered. From that moment on, the Adjust SDK has information about the user's attribution value and you can access it with this method. So, **it is not possible** to access a user's attribution value before the SDK has been initialized and an initial attribution callback has been triggered.
-
-### <a id="push-token"></a>Push token
-
-To send us a push notification token, add the following call to Adjust **whenever your app receives the token or it is updated**:
-
-```cpp
-Adjust2dx::setDeviceToken("YourPushNotificationToken");
-```
-
-Push tokens are used for the Adjust Audience Builder and client callbacks, and are required for the upcoming uninstall tracking feature.
 
 ### <a id="pre-installed-trackers"></a>Pre-installed trackers
 
@@ -671,39 +694,11 @@ If you want to use the Adjust SDK to recognize users whose devices came with you
     Default tracker: 'abc123'
     ```
 
-### <a id="deeplinking"></a>Deep linking
+### <a id="event-buffering"></a>Event buffering
 
-If you are using the Adjust tracker URL with an option to deep link into your app from the URL, there is the possibility to get information about the deep link URL and its content. There are two scenarios when it comes to deep linking: standard and deferred. 
-
-Standard deep linking is when a user already has your app installed. iOS offers native support for retrieving information about the deep link content in this scenario.
-
-Deferred deep linking is when a user does not have your app installed. iOS does not offer native support for deferred deep linking. Instead, the Adjust SDK offers a way to retrieve information about the deep link content.
-
-You need to set up deep link handling in your app **at a native level** - in your generated Xcode project.
-
-### <a id="deeplinking-standard"></a>Standard deep linking
-
-Unfortunately, in this scenario the information about the deep link can not be delivered to you in your Cocos2d-x C++ code. Once you have set up your app to handle deep linking, you will get information about the deep link at a native level. For more information, refer to our chapters below on how to enable deep linking for iOS apps.
-
-### <a id="deeplinking-deferred"></a>Deferred deep linking
-
-In order to get information about the URL content in a deferred deep-linking scenario, you will need to set a callback method on the `AdjustConfig2dx` object which will receive a `std::string` parameter, where the content of the URL will be delivered. You should set this method on the `AdjustConfig2dx` object instance by calling the `setDeferredDeeplinkCallback` method:
+If your app makes heavy use of event tracking, you might want to delay some HTTP requests in order to send them in one batch every minute. You can enable event buffering through your `AdjustConfig2dx` instance by calling the `setEventBufferingEnabled` method:
 
 ```cpp
-#include "Adjust/Adjust2dx.h"
-
-//...
-
-static bool deferredDeeplinkCallbackMethod(std::string deeplink) {
-    CCLOG("\nDeferred deep link received!");
-    CCLOG("\nURL: %s", deeplink.c_str());
-    CCLOG("\n");
-
-    Adjust2dx::appWillOpenUrl(deeplink);
-
-    return true;
-}
-
 // ...
 
 bool AppDelegate::applicationDidFinishLaunching() {
@@ -712,7 +707,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     AdjustConfig2dx adjustConfig = AdjustConfig2dx(appToken, environment);
     adjustConfig.setLogLevel(AdjustLogLevel2dxVerbose);
-    adjustConfig.setDeferredDeeplinkCallback(deferredDeeplinkCallbackMethod);
+    adjustConfig.setEventBufferingEnabled(true);
 
     Adjust2dx::start(adjustConfig);
 
@@ -720,35 +715,55 @@ bool AppDelegate::applicationDidFinishLaunching() {
 }
 ```
 
-<a id="deeplinking-deferred-open">In the deferred deep-linking scenario, there is one additional setting which can be set on the deferred deep link callback method. Once the Adjust SDK gets the deferred deep link information, you can choose whether our SDK opens this URL or not. To do this, set the return value of your deferred deep link callback method.
+If nothing is set here, event buffering is **disabled by default**.
 
-If nothing is set, **the Adjust SDK will always try to launch the URL by default**.
+### <a id="background-tracking"></a>Background tracking
 
-### <a id="deeplinking-ios"></a>Deep link handling for iOS apps
+The default behavior of the Adjust SDK is to **pause sending HTTP requests while the app is in the background**. You can change this in your `AdjustConfig2dx` instance by calling the `setSendInBackground` method:
 
-**This should be done in a native Xcode project.**
+```cpp
+// ...
 
-To set up your iOS app to handle deep linking at a native level, please follow our [guide][ios-deeplinking] in the official iOS SDK README.
+bool AppDelegate::applicationDidFinishLaunching() {
+    std::string appToken = "{YourAppToken}";
+    std::string environment = AdjustEnvironmentSandbox2dx;
 
+    AdjustConfig2dx adjustConfig = AdjustConfig2dx(appToken, environment);
+    adjustConfig.setLogLevel(AdjustLogLevel2dxVerbose);
+    adjustConfig.setSendInBackground(true);
 
-[adjust]:       http://adjust.com
-[dashboard]:    http://adjust.com
-[adjust.com]:   http://adjust.com
+    Adjust2dx::start(adjustConfig);
 
-[releases]:             https://github.com/adjust/cocos2dx_sdk/releases
-[deeplinking]:          https://docs.adjust.com/en/tracker-generation/#deeplinking
-[event-tracking]:       https://docs.adjust.com/en/event-tracking
-[callbacks-guide]:      https://docs.adjust.com/en/callbacks
-[ios-deeplinking]:      https://github.com/adjust/ios_sdk/#deeplinking
-[special-partners]:     https://docs.adjust.com/en/special-partners
-[attribution-data]:     https://github.com/adjust/sdks/blob/master/doc/attribution-data.md
-[currency-conversion]:  https://docs.adjust.com/en/event-tracking/#tracking-purchases-in-different-currencies
+    // ...
+}
+```
 
-[run]:                    https://raw.github.com/adjust/sdks/master/Resources/cocos2dx/ios/run.png
-[add-ios-files]:          https://raw.github.com/adjust/sdks/master/Resources/cocos2dx/ios/add_ios_files.png
-[add-adjust2dx]:          https://raw.github.com/adjust/sdks/master/Resources/cocos2dx/ios/add_adjust2dx.png
-[add-the-frameworks]:     https://raw.github.com/adjust/sdks/master/Resources/cocos2dx/ios/add_the_frameworks.png
-[add-other-linker-flags]: https://raw.github.com/adjust/sdks/master/Resources/cocos2dx/ios/add_other_linker_flags.png
+If nothing is set here, sending in the background is **disabled by default**.
+
+### <a id="offline-mode"></a>Offline mode
+
+You can put the Adjust SDK into offline mode, suspending transmissions to our servers while retaining tracked data to be sent later. When in offline mode, all information is saved in a file, so it is best not to trigger too many events while in offline mode.
+
+You can activate offline mode by calling `Adjust2dx::setOfflineMode` with the parameter set to `true`.
+
+```cpp
+Adjust2dx::setOfflineMode(true);
+```
+
+Conversely, you can deactivate offline mode by calling `Adjust2dx::setOfflineMode` with the parameter set to `false`. When the Adjust SDK is put back in online mode, all saved information is sent to our servers with the correct time information.
+
+Unlike when disabling tracking, **this setting is not remembered** between sessions. This means that the Adjust SDK always starts in online mode, even if the app was terminated in offline mode.
+
+### <a id="disable-tracking"></a>Disable tracking
+
+You can disable the Adjust SDK from tracking by invoking the `Adjust2dx::setEnabled` method with the enabled parameter set to `false`. This setting is **remembered between sessions**, but it can only be activated after the first session.
+
+```cpp
+Adjust2dx::setEnabled(false);
+```
+
+You can verify if the Adjust SDK is currently active by using the `Adjust2dx::isEnabled()` method. It is always possible to activate the Adjust SDK by invoking `Adjust2dx::setEnabled` with the parameter set to `true`.
+
 
 ## <a id="license"></a>License
 
