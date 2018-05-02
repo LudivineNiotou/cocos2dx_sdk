@@ -14,21 +14,24 @@ This is the Cocos2d-x SDK of Adjust™. You can read more about Adjust™ at [ad
    * [Build your app](#sdk-build)
    
 ### Event Tracking 
+
    * [Event tracking](#event-tracking)
       * [Revenue tracking](#revenue-tracking)
       
 ### Custom Parameters
+
    * [Callback parameters](#callback-parameters)
    * [Partner parameters](#partner-parameters)
    
 ### Additional features
 
    * [Attribution callback](#attribution-callback)
-   * [Disable tracking](#disable-tracking)
-   * [Offline mode](#offline-mode)
    * [Event buffering](#event-buffering)
+   * [Offline mode](#offline-mode)
+   * [Disable tracking](#disable-tracking)
     
 ### License 
+
 * [License](#license)
 
 ---
