@@ -13,8 +13,8 @@ This is the Cocos2d-x SDK of Adjust™. You can read more about Adjust™ at [ad
 * [Add Google Play Services](#sdk-gps)
 * [Add permissions](#sdk-permissions)
 * [Install referrer](#android-referrer)
-      * [Google Play Referrer API](#android-referrer-gpr-api)
-      * [Google Play Store intent](#android-referrer-gps-intent)
+     * [Google Play Referrer API](#android-referrer-gpr-api)
+     * [Google Play Store intent](#android-referrer-gps-intent)
 * [Proguard settings](#sdk-proguard)
 * [Integrate the SDK into your app](#sdk-integrate)
 * [Adjust logging](#sdk-logging)
@@ -25,25 +25,25 @@ This is the Cocos2d-x SDK of Adjust™. You can read more about Adjust™ at [ad
 ### Deep Linking
 
 * [Deep linking](#deeplinking)
-      * [Standard deep linking](#deeplinking-standard)
-      * [Deferred deep linking](#deeplinking-deferred)
-      * [Deep link handling for Android apps](#deeplinking-android)
+     * [Standard deep linking](#deeplinking-standard)
+     * [Deferred deep linking](#deeplinking-deferred)
+     * [Deep link handling for Android apps](#deeplinking-android)
 
 ### Event Tracking
 
 * [Event tracking](#event-tracking)
-      * [Revenue tracking](#revenue-tracking)
-      * [Revenue deduplication](#revenue-deduplication)
-      * [In-app purchase verification](#iap-verification)
+     * [Revenue tracking](#revenue-tracking)
+     * [Revenue deduplication](#revenue-deduplication)
+     * [In-app purchase verification](#iap-verification)
       
 ### Custom Parameters
 
 * [Event parameters](#event-parameters)
-      * [Event callback parameters](#callback-parameters)
-      * [Event partner parameters](#partner-parameters)
+     * [Event callback parameters](#callback-parameters)
+     * [Event partner parameters](#partner-parameters)
 * [Session parameters](#session-parameters)
-      * [Session callback parameters](#session-callback-parameters)
-      * [Session partner parameters](#session-partner-parameters)
+     * [Session callback parameters](#session-callback-parameters)
+     * [Session partner parameters](#session-partner-parameters)
 * [Delay start](#delay-start)
       
 ### Additional Features
