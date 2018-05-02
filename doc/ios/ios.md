@@ -21,7 +21,6 @@ This is the Cocos2d-x SDK of Adjust™. You can read more about Adjust™ at [Ad
      * [Standard deep linking](#deeplinking-standard)
      * [Deferred deep linking](#deeplinking-deferred)
      * [Deep link handling for iOS apps](#deeplinking-ios)
-     * [Reattribution via deep links](#deeplinking-reattribution)
 
 ### Event Tracking
 
