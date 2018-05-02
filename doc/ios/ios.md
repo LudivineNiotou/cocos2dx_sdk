@@ -167,6 +167,7 @@ Build and run your app. If the build is successful, carefully read through the S
 ![][run]
 
 
+
 ## Deep Linking
 
 ### <a id="deeplinking"></a>Deep linking
@@ -248,6 +249,8 @@ To set up your iOS app to handle deep linking at a native level, please follow o
 [add-the-frameworks]:     https://raw.github.com/adjust/sdks/master/Resources/cocos2dx/ios/add_the_frameworks.png
 [add-other-linker-flags]: https://raw.github.com/adjust/sdks/master/Resources/cocos2dx/ios/add_other_linker_flags.png
 
+
+
 ## Event Tracking
 
 ### <a id="event-tracking"></a>Event tracking
@@ -297,6 +300,7 @@ Adjust2dx::trackEvent(adjustEvent);
 ### <a id="iap-verification"></a>In-app purchase verification
 
 In-app purchase verification can be done with the Cocos2d-x purchase SDK, which is currently in development and will soon be made publicly available. For more information, please contact support@adjust.com.
+
 
 
 ## Custom Parameters
@@ -416,6 +420,7 @@ config.setDelayStart(5.5);
 In this case, the Adjust SDK will wait 5.5 seconds before sending the initial install session and any events created. After this time has elapsed, or if you call `Adjust2dx::sendFirstPackages()` in the meantime, every session parameter will be added to the delayed install session and events, and the Adjust SDK will resume as usual.
 
 **The maximum delay start time of the Adjust SDK is 10 seconds**.
+
 
 
 ## <a id="additional-features"></a>Additional features
@@ -763,6 +768,7 @@ Adjust2dx::setEnabled(false);
 ```
 
 You can verify if the Adjust SDK is currently active by using the `Adjust2dx::isEnabled()` method. It is always possible to activate the Adjust SDK by invoking `Adjust2dx::setEnabled` with the parameter set to `true`.
+
 
 
 ## <a id="license"></a>License
