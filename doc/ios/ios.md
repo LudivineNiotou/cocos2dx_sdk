@@ -4,9 +4,7 @@ This is the Cocos2d-x SDK of Adjust™. You can read more about Adjust™ at [Ad
 
 ---
 
-## Table of contents
-
-### Basic integration
+### Quick Start
 
 * [Get the SDK](#sdk-get)
 * [Add the SDK to your project](#sdk-add)
@@ -14,37 +12,48 @@ This is the Cocos2d-x SDK of Adjust™. You can read more about Adjust™ at [Ad
 * [Add additional linker flags](#sdk-linker-flags)
 * [Integrate the SDK into your app](#sdk-integrate)
 * [Adjust logging](#sdk-logging)
+* [SDK signature](#sdk-signature)
 * [Build your app](#sdk-build)
 
-### Additional Features
+### Deep Linking
+
+* [Deep linking](#deeplinking)
+     * [Standard deep linking](#deeplinking-standard)
+     * [Deferred deep linking](#deeplinking-deferred)
+     * [Deep link handling for iOS apps](#deeplinking-ios)
+     * [Reattribution via deep links](#deeplinking-reattribution)
+
+### Event Tracking
 
 * [Event tracking](#event-tracking)
     * [Revenue tracking](#revenue-tracking)
     * [Revenue deduplication](#revenue-deduplication)
     * [In-app purchase verification](#iap-verification)
-    * [Callback parameters](#callback-parameters)
-    * [Partner parameters](#partner-parameters)
+
+### Custom Parameters
+
+* [Event parameters](#event-parameters)
+    * [Event callback parameters](#callback-parameters)
+    * [Event partner parameters](#partner-parameters)
 * [Session parameters](#session-parameters)
     * [Session callback parameters](#session-callback-parameters)
     * [Session partner parameters](#session-partner-parameters)
-    * [Delay start](#delay-start)
+* [Delay start](#delay-start)
+
+### Additional Features
+
+* [Push token](#push-token)
 * [Attribution callback](#attribution-callback)
+* [User attribution](#user-attribution)
 * [Session and event callbacks](#session-event-callbacks)
-* [Disable tracking](#disable-tracking)
-* [Offline mode](#offline-mode)
-* [Event buffering](#event-buffering)
-* [SDK signature](#sdk-signature)
-* [Background tracking](#background-tracking)
 * [Device IDs](#device-ids)
     * [iOS advertising identifier](#di-idfa)
     * [Adjust device identifier](#di-adid)
-    * [User attribution](#user-attribution)
-* [Push token](#push-token)
 * [Pre-installed trackers](#pre-installed-trackers)
-* [Deep linking](#deeplinking)
-     * [Standard deep linking](#deeplinking-standard)
-     * [Deferred deep linking](#deeplinking-deferred)
-     * [Deep link handling for iOS apps](#deeplinking-ios)
+* [Event buffering](#event-buffering)
+* [Background tracking](#background-tracking)
+* [Offline mode](#offline-mode)
+* [Disable tracking](#disable-tracking)
         
 ### License
 
