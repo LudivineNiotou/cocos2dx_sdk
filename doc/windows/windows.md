@@ -2,25 +2,36 @@
 
 This is the Cocos2d-x SDK of Adjust™. You can read more about Adjust™ at [adjust.com].
 
-## Table of contents
+---
 
-* [Basic integration](#basic-integration)
+### Quick Start
+
    * [Get the SDK](#sdk-get)
    * [Add the SDK to your project](#sdk-add)
    * [Add Adjust Windows Runtime Component project to your solution](#sdk-winrt)
    * [Integrate the SDK into your app](#sdk-integrate)
    * [Adjust logging](#sdk-logging)
    * [Build your app](#sdk-build)
-* [Additional features](#additional-features)
+   
+### Event Tracking 
    * [Event tracking](#event-tracking)
       * [Revenue tracking](#revenue-tracking)
-      * [Callback parameters](#callback-parameters)
-      * [Partner parameters](#partner-parameters)
-    * [Attribution callback](#attribution-callback)
-    * [Disable tracking](#disable-tracking)
-    * [Offline mode](#offline-mode)
-    * [Event buffering](#event-buffering)
+      
+### Custom Parameters
+   * [Callback parameters](#callback-parameters)
+   * [Partner parameters](#partner-parameters)
+   
+### Additional features
+
+   * [Attribution callback](#attribution-callback)
+   * [Disable tracking](#disable-tracking)
+   * [Offline mode](#offline-mode)
+   * [Event buffering](#event-buffering)
+    
+### License 
 * [License](#license)
+
+---
 
 ## <a id="basic-integration">Basic integration
 
