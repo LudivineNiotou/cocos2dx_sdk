@@ -63,9 +63,7 @@ This is the Cocos2d-x SDK of Adjust™. You can read more about Adjust™ at [ad
 * [Offline mode](#offline-mode)
 * [Disable tracking](#disable-tracking)
 
-### License
-  
-* [License](#license)
+### [License](#license)
 
 
 ---
@@ -1010,10 +1008,7 @@ Adjust2dx::setEnabled(false);
 You can verify if the Adjust SDK is currently active by using the `Adjust2dx::isEnabled()` method. It is always possible to activate the Adjust SDK by invoking `Adjust2dx::setEnabled` with the parameter set to `true`.
 
 
-
-## License
-
-### <a id="license"></a>License
+## <a id="license"></a>License
 
 The Adjust SDK is licensed under the MIT License.
 
