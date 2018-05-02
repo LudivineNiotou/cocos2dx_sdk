@@ -2,53 +2,69 @@
 
 This is the Cocos2d-x SDK of Adjust™. You can read more about Adjust™ at [adjust.com].
 
-## Table of contents
+---
 
-* [Basic integration](#basic-integration)
-   * [Get the SDK](#sdk-get)
-   * [Add the SDK to your project](#sdk-add)
-   * [Add the C++ source file definitions](#sdk-cpp-files)
-   * [Add the Adjust library to your project](#sdk-library)
-   * [Add Google Play Services](#sdk-gps)
-   * [Add permissions](#sdk-permissions)
-   * [Install referrer](#android-referrer)
+### Quick Start
+
+* [Get the SDK](#sdk-get)
+* [Add the SDK to your project](#sdk-add)
+* [Add the C++ source file definitions](#sdk-cpp-files)
+* [Add the Adjust library to your project](#sdk-library)
+* [Add Google Play Services](#sdk-gps)
+* [Add permissions](#sdk-permissions)
+* [Install referrer](#android-referrer)
       * [Google Play Referrer API](#android-referrer-gpr-api)
       * [Google Play Store intent](#android-referrer-gps-intent)
-   * [Proguard settings](#sdk-proguard)
-   * [Integrate the SDK into your app](#sdk-integrate)
-   * [Adjust logging](#sdk-logging)
-   * [Session tracking](#sdk-session-tracking)
-   * [Build your app](#sdk-build)
-* [Additional features](#additional-features)
-   * [Event tracking](#event-tracking)
-      * [Revenue tracking](#revenue-tracking)
-      * [Revenue deduplication](#revenue-deduplication)
-      * [In-app purchase verification](#iap-verification)
-      * [Callback parameters](#callback-parameters)
-      * [Partner parameters](#partner-parameters)
-   * [Session parameters](#session-parameters)
-      * [Session callback parameters](#session-callback-parameters)
-      * [Session partner parameters](#session-partner-parameters)
-      * [Delay start](#delay-start)
-   * [Attribution callback](#attribution-callback)
-   * [Session and event callbacks](#session-event-callbacks)
-   * [Disable tracking](#disable-tracking)
-   * [Offline mode](#offline-mode)
-   * [Event buffering](#event-buffering)
-   * [SDK signature](#sdk-signature)
-   * [Background tracking](#background-tracking)
-   * [Device IDs](#device-ids)
-      * [Google Play Services advertising identifier](#di-gps-adid)
-      * [Amazon advertising identifier](#di-fire-adid)
-      * [Adjust device identifier](#di-adid)
-   * [User attribution](#user-attribution)
-   * [Push token](#push-token)
-   * [Track additional device identifiers](#track-additional-ids)
-   * [Pre-installed trackers](#pre-installed-trackers)
-   * [Deep linking](#deeplinking)
+* [Proguard settings](#sdk-proguard)
+* [Integrate the SDK into your app](#sdk-integrate)
+* [Adjust logging](#sdk-logging)
+* [SDK signature](#sdk-signature)
+* [Session tracking](#sdk-session-tracking)
+* [Build your app](#sdk-build)
+
+### Deep Linking
+
+* [Deep linking](#deeplinking)
       * [Standard deep linking](#deeplinking-standard)
       * [Deferred deep linking](#deeplinking-deferred)
       * [Deep link handling for Android apps](#deeplinking-android)
+
+### Event Tracking
+
+* [Event tracking](#event-tracking)
+      * [Revenue tracking](#revenue-tracking)
+      * [Revenue deduplication](#revenue-deduplication)
+      * [In-app purchase verification](#iap-verification)
+      
+### Custom Parameters
+
+* [Event parameters](#event-parameters)
+      * [Event callback parameters](#callback-parameters)
+      * [Event partner parameters](#partner-parameters)
+* [Session parameters](#session-parameters)
+      * [Session callback parameters](#session-callback-parameters)
+      * [Session partner parameters](#session-partner-parameters)
+* [Delay start](#delay-start)
+      
+### Additional Features
+ 
+* [Push token](#push-token)
+* [Attribution callback](#attribution-callback)
+* [User attribution](#user-attribution)
+* [Session and event callbacks](#session-event-callbacks)
+* [Device IDs](#device-ids)
+     * [Google Play Services advertising identifier](#di-gps-adid)
+     * [Amazon advertising identifier](#di-fire-adid)
+     * [Adjust device identifier](#di-adid)
+     * [Track additional device identifiers](#track-additional-ids)
+* [Pre-installed trackers](#pre-installed-trackers)
+* [Event buffering](#event-buffering)
+* [Background tracking](#background-tracking)
+* [Offline mode](#offline-mode)
+* [Disable tracking](#disable-tracking)
+
+### License
+  
 * [License](#license)
 
 
