@@ -41,7 +41,7 @@ This is the Cocos2d-x SDK of Adjust™. You can read more about Adjust™ at [Ad
 
 ### Additional Features
 
-* [Push token](#push-token)
+* [Push token(Uninstall/Reinstall tracking)](#push-token)
 * [Attribution callback](#attribution-callback)
 * [User attribution](#user-attribution)
 * [Session and event callbacks](#session-event-callbacks)
@@ -427,7 +427,7 @@ In this case, the Adjust SDK will wait 5.5 seconds before sending the initial in
 
 Once you integrate the Adjust SDK into your project, you can take advantage of the following features.
 
-### <a id="push-token"></a>Push token
+### <a id="push-token"></a>Push token (Uninstall/Reinstall tracking)
 
 To send us a push notification token, add the following call to Adjust **whenever your app receives the token or it is updated**:
 
