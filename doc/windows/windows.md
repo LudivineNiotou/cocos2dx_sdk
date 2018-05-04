@@ -20,8 +20,8 @@ This is the Cocos2d-x SDK of Adjust™. You can read more about Adjust™ at [ad
       
 ### Custom Parameters
 
-   * [Callback parameters](#callback-parameters)
-   * [Partner parameters](#partner-parameters)
+   * [Event callback parameters](#callback-parameters)
+   * [Event partner parameters](#partner-parameters)
    
 ### Additional features
 
@@ -182,7 +182,7 @@ You can read more about revenue and event tracking in the [event tracking guide]
 
 ## Custom Parameters
 
-### <a id="callback-parameters">Callback parameters
+### <a id="callback-parameters">Event callback parameters
 
 You can register a callback URL for your events in your [dashboard]. We will send a GET request to that URL whenever the event is tracked. You can add callback parameters to that event by calling `addCallbackParameter` method on the event before tracking it. We will then append these parameters to your callback URL.
 
@@ -207,7 +207,7 @@ It should be mentioned that we support a variety of placeholders, like `{idfa}`,
 
 You can read more about using URL callbacks, including a full list of available values, in our [callbacks guide][callbacks-guide].
 
-### <a id="partner-parameters">Partner parameters
+### <a id="partner-parameters">Event partner parameters
 
 For any integrations that have been activated in your Adjust dashboard, you can add parameters to send to these network partners.
 
